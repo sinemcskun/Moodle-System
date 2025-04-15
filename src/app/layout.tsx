@@ -24,9 +24,63 @@ export default function RootLayout({ children }: { children: React.ReactNode}) {
     <html lang="tr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      >        
+
+        {/* Header */}
+        <header className="bg-white shadow-sm">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+            {/* Logo and Site Name */}
+            <div className="flex items-center space-x-3">
+              <Image 
+                src="/aybu-logo.png" 
+                alt="AYBU Logo" 
+                width={40} 
+                height={40} 
+                className="h-10 w-auto"
+              />
+              <h1 className="text-xl font-bold text-gray-800">AYBU Moodle</h1>
+            </div>
+
+            {/* Navigation */}
+            <nav className="hidden md:flex space-x-6">
+              <Link href="/dashboard" className="text-gray-700 hover:text-red-600 transition">Dashboard</Link>
+              <Link href="/courses" className="text-gray-700 hover:text-red-600 transition">Courses</Link>
+              <Link href="/calendar" className="text-gray-700 hover:text-red-600 transition">Calendar</Link>
+              <Link href="/grades" className="text-gray-700 hover:text-red-600 transition">Grades</Link>
+
+              {/* Profile Dropdown */}
+              <div className="relative">
+                <div className="group inline-block">
+                  <button className="flex items-center space-x-1 text-gray-700 hover:text-red-600 transition">
+                    <span>My Profile</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  
+                  {/* Dropdown Menu */}
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="text-sm font-medium text-gray-800">öğrenci numarası</p>{/* bu alan dinamik yapılacak */}
+                    </div>
+                    <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profil</Link>
+                    <Link href="/grades" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Başarı notları</Link>
+                    <Link href="/calendar" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Takvim</Link>
+                    <Link href="/files" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Kişisel dosyalar</Link>
+                    <Link href="/reports" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Raporlar</Link>
+                    <Link href="/preferences" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Tercihler</Link>
+                    <div className="border-t border-gray-100"></div>
+                    <Link href="/logout" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Çıkış yap</Link>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+        
         {/*Main Content*/}
         <main className="bg-white min-h-screen">{children}</main>
+
         {/*Footer*/}
         <footer className="bg-gray-900 text-white text-sm p-4 text-center">
           <p>AYBU Moodle System &copy; 2025 | <Link href="#" className="text-red-400">Creative Commons</Link></p>
