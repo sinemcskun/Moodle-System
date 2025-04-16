@@ -55,12 +55,7 @@ export const FolderIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-// Yeni eklenen ikonlar
-export const CheckCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-  </svg>
-);
+
 
 export const ClockIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} viewBox="0 0 24 24" fill="currentColor">
@@ -86,5 +81,33 @@ export const PlusIcon = (props: React.SVGProps<SVGSVGElement>) => (
   >
     <path d="M12 5v14" />
     <path d="M5 12h14" />
+  </svg>
+);
+export const CheckCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    {...props}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+    <path d="M22 4 12 14.01l-3-3" />
+  </svg>
+);
+export const EditIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    {...props}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
   </svg>
 );
