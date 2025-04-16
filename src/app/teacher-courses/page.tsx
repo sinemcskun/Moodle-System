@@ -35,7 +35,7 @@ export default function TeacherCoursesPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Kurslarım</h1>
         <Link 
-          href="/teacher-courses/create-course"
+          href="/teacher-courses/create"
           className="flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
         >
           <FiPlus className="mr-2" />
@@ -78,12 +78,13 @@ export default function TeacherCoursesPage() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{course.lastUpdated}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-2">
-                      <Link
-                        href={`/teacher-courses/edit-course?id=${course.id}`}
+
+                        <Link
+                        href={`/teacher-courses/${course.id}/edit`}
                         className="text-blue-600 hover:text-blue-900"
-                      >
+                        >
                         <FiEdit className="h-5 w-5" />
-                      </Link>
+                    </Link>
                       <button className="text-red-600 hover:text-red-900">
                         <FiTrash2 className="h-5 w-5" />
                       </button>
