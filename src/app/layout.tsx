@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Main Header */}
         <header className="bg-white shadow-sm">
           
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-start justify-between">
+          <div className="max-w-7x2 mx-auto px-6 py-4 flex items-start justify-between">
             <img src="/ogmer.png" alt="Logo" width={200} height={50} />
             {/* Left Side - University Info */}
             <div className="flex space-x-8">
