@@ -1,10 +1,20 @@
 "use client";
-
+import {
+  User,
+  FileText,
+  Calendar,
+  Folder,
+  File,
+  Settings,
+  LogOut,
+  ChevronDown,
+  BookOpenIcon
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { 
-  HomeIcon, 
-  BookIcon, 
+import {
+  HomeIcon,
+  BookIcon,
   UserIcon,
   CalendarIcon,
   FileTextIcon,
@@ -56,17 +66,17 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-      {/* Üst Bilgi */}
+      {/* Üst Bilgi - Düzenlenmiş ve Hizalanmış */}
       <header className="bg-white shadow-sm py-4 px-6">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="bg-blue-600 text-white p-2 rounded-md">
-              <BookIcon className="h-6 w-6" />
-            </div>
-            <h1 className="text-xl font-bold">Eğitim Portalı</h1>
+          {/* Sol kısım - Logo ve Başlık yan yana */}
+          <div className="flex items-center space-x-4">
+            <img src="/ogmer.png" alt="Logo" width={200} height={100} />
           </div>
+
+          {/* Sağ kısım - Navigasyon butonları */}
           <nav className="flex gap-2">
-            <Button 
+            <Button
               variant={activeTab === 'dashboard' ? 'default' : 'ghost'}
               onClick={() => setActiveTab('dashboard')}
               asChild
@@ -75,7 +85,7 @@ export default function DashboardPage() {
                 <HomeIcon className="mr-2 h-4 w-4" /> Ana Sayfa
               </Link>
             </Button>
-            <Button 
+            <Button
               variant={activeTab === 'courses' ? 'default' : 'ghost'}
               onClick={() => setActiveTab('courses')}
               asChild
@@ -84,19 +94,78 @@ export default function DashboardPage() {
                 <BookIcon className="mr-2 h-4 w-4" /> Derslerim
               </Link>
             </Button>
-            <Button 
-              variant={activeTab === 'profile' ? 'default' : 'ghost'}
-              onClick={() => setActiveTab('profile')}
+
+            {/* All Courses Button - New Addition */}
+            <Button
+              variant={activeTab === 'all-courses' ? 'default' : 'ghost'}
+              onClick={() => setActiveTab('all-courses')}
               asChild
             >
-              <Link href="/profile">
-                <UserIcon className="mr-2 h-4 w-4" /> Profilim
+              <Link href="/all-courses">
+                <BookOpenIcon className="mr-2 h-4 w-4" /> Tüm Dersler
               </Link>
             </Button>
+
+            {/* Profile Dropdown */}
+            <div className="relative">
+              <div className="group inline-block">
+                <Button
+                  variant={activeTab === 'profile' ? 'default' : 'ghost'}
+                  className="flex items-center space-x-1"
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profilim</span>
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+
+                {/* Dropdown Menu (unchanged) */}
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200">
+                  <div className="px-4 py-2 border-b border-gray-200">
+                    <p className="text-sm font-medium text-gray-800">öğrenci numarası</p>
+                  </div>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <User className="mr-2 h-4 w-4" /> Profil
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/grades" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <FileText className="mr-2 h-4 w-4" /> Başarı notları
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/calendar" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <Calendar className="mr-2 h-4 w-4" /> Takvim
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/files" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <Folder className="mr-2 h-4 w-4" /> Kişisel dosyalar
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/reports" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <File className="mr-2 h-4 w-4" /> Raporlar
+                    </Link>
+                  </Button>
+                  <Button variant="ghost" className="w-full justify-start" asChild>
+                    <Link href="/preferences" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <Settings className="mr-2 h-4 w-4" /> Tercihler
+                    </Link>
+                  </Button>
+                  <div className="border-t border-gray-200"></div>
+                  <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-800" asChild>
+                    <Link href="/" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                      <LogOut className="mr-2 h-4 w-4" /> Çıkış yap
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
           </nav>
         </div>
       </header>
-      
+
       {/* Ana İçerik */}
       <main className="flex-1 container mx-auto py-8 px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -109,7 +178,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  Eğitim portalına erişiminiz aktif. Derslerinizi takip edebilir, ödevlerinizi yükleyebilir ve 
+                  Eğitim portalına erişiminiz aktif. Derslerinizi takip edebilir, ödevlerinizi yükleyebilir ve
                   akademik bilgilerinizi görüntüleyebilirsiniz.
                 </p>
               </CardContent>
@@ -126,8 +195,8 @@ export default function DashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
-                      <div 
-                        className="bg-blue-600 h-2.5 rounded-full" 
+                      <div
+                        className="bg-blue-600 h-2.5 rounded-full"
                         style={{ width: `${course.progress}%` }}
                       ></div>
                     </div>
@@ -140,7 +209,7 @@ export default function DashboardPage() {
               ))}
             </div>
           </div>
-          
+
           {/* Sağ Sütun */}
           <div className="space-y-6">
             {/* Bildirimler */}
