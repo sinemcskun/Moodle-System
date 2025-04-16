@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { FiX } from 'react-icons/fi';
-import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button'; // Shadcn/ui veya kendi buton bileşeniniz
 import { 
   HomeIcon, 
   BookIcon, 
@@ -16,8 +15,7 @@ import {
   FileIcon,
   Settings,
   LogOut
-} from 'lucide-react';
-import Link from 'next/link';
+} from 'lucide-react'; // veya kullandığınız ikon kütüphanesi
 
 const AppHeader = ({
   activeTab,
@@ -122,110 +120,79 @@ const AppHeader = ({
   </header>
 );
 
-export default function EditCoursePage() {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState('courses');
-  
-  // URL'den kurs ID'sini al
-  const searchParams = new URLSearchParams(window.location.search);
-  const courseId = searchParams.get('id');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Kurs güncellendi');
-    router.push('/teacher-courses'); // Kurslar sayfasına yönlendir
-  };
+export default function TeacherDashboardPage() {
+  const [activeTab, setActiveTab] = useState('dashboard');
 
   return (
     <div className="min-h-screen bg-gray-50">
       <AppHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       
       <div className="container mx-auto px-4 py-8">
-        <div className="bg-white rounded-lg shadow-xl max-w-4xl mx-auto">
-          <div className="flex justify-between items-center border-b p-6">
-            <h2 className="text-2xl font-bold">Kursu Düzenle</h2>
-            <button 
-              onClick={() => router.push('/teacher-courses')}
-              className="text-gray-500 hover:text-gray-700"
-            >
-              <FiX className="h-6 w-6" />
-            </button>
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold">Öğretmen Panosu</h1>
+          <p className="text-gray-600">Hoş geldiniz! Son aktiviteleriniz ve istatistikler burada görüntülenecek.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {/* İstatistik Kartları */}
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-semibold text-gray-700">Aktif Kurslar</h3>
+            <p className="text-3xl font-bold mt-2">12</p>
           </div>
-          
-          <form onSubmit={handleSubmit} className="p-6">
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                Kurs Başlığı
-              </label>
-              <input
-                id="title"
-                type="text"
-                defaultValue="Next.js ile Modern Web Geliştirme"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-semibold text-gray-700">Toplam Öğrenci</h3>
+            <p className="text-3xl font-bold mt-2">245</p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-semibold text-gray-700">Yaklaşan Dersler</h3>
+            <p className="text-3xl font-bold mt-2">3</p>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-lg font-semibold text-gray-700">Bekleyen Görevler</h3>
+            <p className="text-3xl font-bold mt-2">7</p>
+          </div>
+        </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                Kurs Açıklaması
-              </label>
-              <textarea
-                id="description"
-                defaultValue="Next.js kullanarak modern web uygulamaları geliştirmeyi öğrenin."
-                rows={4}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Son Aktivite */}
+          <div className="lg:col-span-2 bg-white p-6 rounded-lg shadow">
+            <h2 className="text-xl font-bold mb-4">Son Aktivite</h2>
+            <div className="space-y-4">
+              {[1, 2, 3].map((item) => (
+                <div key={item} className="border-b pb-4 last:border-b-0">
+                  <p className="text-gray-600">Bugün 14:3{item}</p>
+                  <p>Kurs ödevi için {item} yeni gönderim alındı</p>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="category">
-                  Kategori
-                </label>
-                <select
-                  id="category"
-                  defaultValue="web-development"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="web-development">Web Geliştirme</option>
-                  <option value="mobile">Mobil Geliştirme</option>
-                  <option value="data-science">Veri Bilimi</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="status">
-                  Durum
-                </label>
-                <select
-                  id="status"
-                  defaultValue="active"
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                >
-                  <option value="draft">Taslak</option>
-                  <option value="active">Yayında</option>
-                </select>
-              </div>
+          {/* Hızlı Erişim */}
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h2 className="text-xl font-bold mb-4">Hızlı Erişim</h2>
+            <div className="space-y-3">
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/teacher-courses/create">
+                  Yeni Kurs Oluştur
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/grades">
+                  Notları Giriş Yap
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/calendar">
+                  Ders Programı Ekle
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start" asChild>
+                <Link href="/announcements">
+                  Duyuru Yayınla
+                </Link>
+              </Button>
             </div>
-
-            <div className="flex justify-end space-x-3 mt-6">
-              <button
-                type="button"
-                onClick={() => router.push('/teacher-courses')}
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                İptal
-              </button>
-              <button
-                type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Kaydet
-              </button>
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
