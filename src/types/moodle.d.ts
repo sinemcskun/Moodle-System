@@ -1,4 +1,7 @@
 export type Course = {
+  progress: number;
+  startdate: number;
+  summary: string;
   id: number;
   fullname: string;
   shortname: string;

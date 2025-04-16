@@ -1,9 +1,12 @@
 "use client";
 
-import Link from "next/link";
+
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { login } from "@/lib/auth/service";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
 
@@ -17,77 +20,98 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    
-    const { success, error } = await login(username, password);
-    
+
     try {
       const result = await login(username, password);
       if (result.success) {
         localStorage.setItem("token", result.token);
-        router.push("/dashboard"); // Redirect to dashboard on success
+        router.push("/courses");
       } else {
-        setError(result.error || "Login failed");
+        setError(result.error || "Giriş başarısız");
       }
-    } catch (error) {
-      setError("An error occurred during login");
+    } catch (err) {
+      setError("Bir hata oluştu");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Upper Part: Logo */}
-      <header className="bg-gray-100 border-b p-6 flex flex-col">
-        <a href="/" title="Ana Sayfa"><img src="/ogmer.png" alt="Logo" width={100} height={50} /></a>
-        {/* Navigation Bar */}
-        <nav className="bg-blue mt-4 flex space-x-8 text-sm">
-          <Link href="/" className="text-gray-700 hover:text-red-600">Ana Sayfa</Link>
-        </nav>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Header */}
+      <header className="bg-white shadow-sm py-4 px-6">
+        <div className="container mx-auto flex justify-between items-center">
+          <Link href="/">
+            <img 
+              src="/ogmer.png" 
+              alt="Logo" 
+              className="h-12"
+              width={100}
+              height={48}
+            />
+          </Link>
+        </div>
       </header>
-      
+
       {/* Login Form */}
-      <main className="flex flex-1 items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">Log in</h2>
+      <main className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-md">
+          <h1 className="text-2xl font-bold text-center mb-6">ÖĞMER Sistemine Giriş Yap</h1>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+            <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-md text-sm">
               {error}
             </div>
           )}
-                    
-          <form onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              placeholder="Kullanıcı Adı" 
-              className="w-full p-3 border rounded-md mb-3" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <input 
-              type="password" 
-              placeholder="Şifre" 
-              className="w-full p-3 border rounded-md mb-3" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
 
-          <Link href="#" className="text-sm text-red-500 hover:underline">
-            Forgot your username or password?
-          </Link>
-          <button 
-              type="submit"
-              className={`w-full bg-red-600 text-white p-3 rounded-md mt-4 hover:bg-red-700 ${
-                isLoading ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-              disabled={isLoading}
-            >
-              {isLoading ? "Giriş Yapılıyor..." : "Log in"}
-            </button>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium mb-1">
+                Öğrenci Numarası/Sicil Numarası
+              </label>
+              <Input
+                id="username"
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Öğrenci Numarası/Sicil Numarası"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium mb-1">
+                Şifre
+              </label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+            </div>
+
+            <div className="pt-2">
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isLoading}
+              >
+                {isLoading ? "Giriş Yapılıyor..." : "Giriş Yap"}
+              </Button>
+            </div>
           </form>
+
+          <div className="mt-4 text-center text-sm">
+            <Link 
+              href="/forgot-password" 
+              className="text-blue-600 hover:underline"
+            >
+              Şifremi Unuttum
+            </Link>
+          </div>
         </div>
       </main>
     </div>
