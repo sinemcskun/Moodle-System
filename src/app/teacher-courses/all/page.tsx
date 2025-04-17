@@ -78,7 +78,7 @@ const AppHeader = ({
 
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200">
               <div className="px-4 py-2 border-b border-gray-200">
-                <p className="text-sm font-medium text-gray-800">öğrenci numarası</p>
+                <p className="text-sm font-medium text-gray-800">Sicil Numarası</p>
               </div>
               <Button variant="ghost" className="w-full justify-start" asChild>
                 <Link href="/teacher-profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
@@ -203,7 +203,7 @@ export default function AllCoursesPage() {
         <div className="space-y-6">
           <div className="flex justify-between items-center">
             <h1 className="text-3xl font-bold">Tüm Kurslar</h1>
-            <Button onClick={() => router.push('/courses')}>
+            <Button onClick={() => router.push('/teacher-courses')}>
               Kurslarıma Git
             </Button>
           </div>

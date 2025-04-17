@@ -73,7 +73,7 @@ export default function ProfilePage() {
               asChild
             >
               <Link href="/teacher-courses/all">
-                <BookOpenIcon className="mr-2 h-4 w-4" /> Tüm Kurslarım
+                <BookOpenIcon className="mr-2 h-4 w-4" /> Tüm Kurslar
               </Link>
             </Button>
 
@@ -92,7 +92,7 @@ export default function ProfilePage() {
                 {/* Dropdown Menu */}
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-200">
                   <div className="px-4 py-2 border-b border-gray-200">
-                    <p className="text-sm font-medium text-gray-800">sicil numarası</p>
+                    <p className="text-sm font-medium text-gray-800">Sicil Numarası</p>
                   </div>
                   <Button variant="ghost" className="w-full justify-start" asChild>
                     <Link href="/teacher-profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
