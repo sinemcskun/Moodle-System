@@ -78,7 +78,7 @@ const AppHeader = ({
                 <p className="text-sm font-medium text-gray-800">sicil numarası</p>
               </div>
               <Button variant="ghost" className="w-full justify-start" asChild>
-                <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
+                <Link href="/teacher-profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
                   <User className="mr-2 h-4 w-4" /> Profil
                 </Link>
               </Button>
