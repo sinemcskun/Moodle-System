@@ -57,7 +57,7 @@ const AppHeader = ({
           onClick={() => setActiveTab('all-courses')}
           asChild
         >
-          <Link href="/all-courses">
+          <Link href="/teacher-courses/all">
             <BookOpenIcon className="mr-2 h-4 w-4" /> Tüm Kurslar
           </Link>
         </Button>
